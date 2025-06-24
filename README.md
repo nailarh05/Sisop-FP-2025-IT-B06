@@ -33,10 +33,10 @@
 
 **Memahami komunikasi client-server melalui socket TCP. Client mengirimkan nama hewan ke server.**  
 Server merespons sesuai input:
-"dragon" → "rawr"
-"wolf" → "awoo"
-"dog" → "woof"
-"lainnya" → "unknown :("
+`dragon` → `rawr`
+`wolf` → `awoo`
+`dog` → `woof`
+lainnya → `unknown :(`
 
 Client mencetak respons yang diterima dari server.
 
