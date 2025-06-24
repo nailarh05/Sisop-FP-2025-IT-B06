@@ -48,5 +48,33 @@ int main() {
     printf("ACC bosku! Koneksi aman nih ye... (Socket fd: %d)\n", new_socket);  
 }
 
+  while(1) {
+        
+        int valread = read(new_socket, buffer, BUFFER_SIZE);
+        if (valread <= 0) break;
+        
+        printf("Pesan diterima dari client: %s\n", buffer);
+        
+        char *response;
+       
+        if (strcmp(buffer, "dragon") == 0) {
+            response = "rawr";
+        } else if (strcmp(buffer, "wolf") == 0) {
+            response = "awoo";
+        } else if (strcmp(buffer, "dog") == 0) {
+            response = "woof";
+        } else {
+            response = "unknown :(";
+        }
+       
+        send(new_socket, response, strlen(response), 0);
+        printf("Mengirim respons: %s\n", response);
+        
+        memset(buffer, 0, BUFFER_SIZE);
+    }
+    
+    close(new_socket);
+    close(server_fd);
+    
     return 0;
-} 
+}
