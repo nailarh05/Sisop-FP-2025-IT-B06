@@ -45,8 +45,8 @@ Client mencetak respons yang diterima dari server.
 ## Catatan
 
 - Project ini dikerjakan dengan pembagian tugas yang merata antar anggota kelompok.
-- Pengetesan dilakukan di sistem Linux (Ubuntu 22.04 / WSL).
-- Setiap fitur telah diuji menggunakan skenario normal dan edge-case.
+- Pengetesan dilakukan di sistem Linux (Ubuntu 22.04 / WSL / VMware).
+- Setiap fitur telah diuji dan dapat dipastikan semuanya berjalan dengan baik.
 
 ---
 
