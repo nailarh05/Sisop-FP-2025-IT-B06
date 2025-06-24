@@ -31,9 +31,14 @@
 
 ## Deskripsi Soal
 
-**Memahami race condition pada operasi check-then-act.**  
-Program membuat 2 thread; tiap thread mencoba mengambil satu-satunya sumber daya yang tersedia dari variabel global `stok` (nilai awal 1).  
-Jika tanpa **mutex**, kedua thread bisa lolos pengecekan dan sama-sama mengambil sumber daya, menghasilkan nilai akhir `stok` menjadi -1.
+**Memahami komunikasi client-server melalui socket TCP. Client mengirimkan nama hewan ke server.**  
+Server merespons sesuai input:
+"dragon" → "rawr"
+"wolf" → "awoo"
+"dog" → "woof"
+"lainnya" → "unknown :("
+
+Client mencetak respons yang diterima dari server.
 
 ---
 
