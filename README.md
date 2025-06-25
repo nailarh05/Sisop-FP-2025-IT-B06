@@ -170,6 +170,61 @@ while(1) {
 ```
 This process allows repeated input/output until the client or server is terminated manually.
 
+###SERVER SIDE
+
+#### Teori
+"A file descriptor is a small integer that the kernel uses to identify the open files being accessed by a process. Whenever a process opens an existing file or creates a new file, the kernel returns a file descriptor that is used to read or write the file."(Stevens et al., 1998, Ch. 3)
+
+### Solusi
+```c
+int main() {
+    int server_fd, new_socket;
+    struct sockaddr_in address;
+    int opt = 1;
+    int addrlen = sizeof(address);
+    char buffer[BUFFER_SIZE] = {0};
+```
+
+### Teori
+"The protocol argument to the socket function is typically set to 0 for most applications, which selects the default protocol for the given domain and socket type."(Stevens et al., 1998, Ch. 4).
+
+### Solusi
+```c
+if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        perror("socket failed");
+        exit(EXIT_FAILURE);
+    }
+```
+
+### Teori
+Most implementations and APIs provide a way to bypass this restriction. With
+the Berkeley sockets API, the SO_REUSEADDR socket option enables the bypass
+operation. It lets the caller assign itself a local port number even if that port number is part of some connection in the 2MSL wait state. We will see, however, that
+even with this bypass mechanism for one socket (address, port number pair), the
+rules of TCP still (should) prevent this port number from being reused by another
+instantiation of the same connection that is in the 2MSL wait state.(Stevens, 1998, pp. 620)
+
+### Solusi 
+```c
+if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
+        perror("setsockopt");
+        exit(EXIT_FAILURE);
+    }
+```
+
+### Teori
+In IPv4, the sin_addr.s_addr field of the struct sockaddr_in structure is set to INADDR_ANY. In
+IPv6, the sin6_addr field of the struct sockaddr_in6 structure is assigned into from the global
+variable in6addr_any. Or, if you’re declaring a new struct in6_addr, you can initialize it to
+IN6ADDR_ANY_INIT. (Beej's Guide, Ch. 5)
+
+### Solusi
+```c
+address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(PORT);
+```
+
 ## Video Menjalankan Program
 
 
