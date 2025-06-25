@@ -65,7 +65,11 @@ Sisop-FP-2025-IT-B06/
 ## Pengerjaan
 
 #### Teori
-Communication between processes running on different servers can be done using sockets and TCP/IP protocols. In the operating system context, this mechanism is known as Inter-Process Communication (IPC) through a network.
+
+1.With multi-tier programming languages, programmers can specify the locations of code to run in order to reduce development efforts for the web-based client-server model where programmers write client and server programs separately and test the multiple programs together. The RPC calculus, one of the foundations of those languages by Cooper and Wadler, has the feature of symmetric communication in programmer's writing arbitrarily deep nested client-server interactions. However, the existing research only considers dynamically typed locations. We propose a typed RPC calculus where locations are tracked in type-level. A new located type system paves the way for a theory of RPC calculi for the client-server model.
+(In the following papers published in SCP2020 and PPDP2021, the typed RPC calculus will be enhanced with polymorphic locations and a type-based slicing compilation.)
+
+2.Communication between processes running on different servers can be done using sockets and TCP/IP protocols. In the operating system context, this mechanism is known as Inter-Process Communication (IPC) through a network.
 
 According to Silberschatz et al. (2020):
 `A socket is defined as an endpoint for communication. A pair of processes communicating over a network employs a pair of sockets — one for each process.` 
