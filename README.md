@@ -303,6 +303,7 @@ while(1) {
 2. Kerrisk, Michael. (2010). The Linux Programming Interface
 3. Beej's Guide to Network Programming. - https://beej.us/guide/bgnet/html/ : A lightweight and popular guide for socket programming in C.
 4. Linux man pages: `man socket`, `man bind`, `man connect`, `man send`, `man recv` : Official documentation for Linux system calls related to networking.
+5. Stevens, W. R. (1994). TCP/IP Illustrated, Volume 1: The Protocols. Addison-Wesley.
 
 ---
 
