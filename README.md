@@ -174,7 +174,7 @@ while(1) {
 ```
 This process allows repeated input/output until the client or server is terminated manually.
 
-###SERVER SIDE
+### SERVER SIDE
 
 #### Teori
 "A file descriptor is a small integer that the kernel uses to identify the open files being accessed by a process. Whenever a process opens an existing file or creates a new file, the kernel returns a file descriptor that is used to read or write the file."(Stevens et al., 1998, Ch. 3)
