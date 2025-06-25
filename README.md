@@ -31,14 +31,18 @@
 
 ## Deskripsi Soal
 
-**Memahami komunikasi client-server melalui socket TCP. Client mengirimkan nama hewan ke server.**  
-Server merespons sesuai input:
-- `dragon` → `rawr`
-- `wolf` → `awoo`
-- `dog` → `woof`
-- lainnya → `unknown :(`
+**Understanding client-server communication via TCP socket. The client sends the name of the animal to the server.**  
+There are two programs: a Server and a Client. The Client sends a message to the Server, and the Server checks the message and responds based on the following rules:
 
-Client mencetak respons yang diterima dari server.
+If the message is "dragon", the Server replies with "rawr".
+
+If the message is "wolf", the Server replies with "awoo".
+
+If the message is "dog", the Server replies with "woof".
+
+For any other message, the Server responds with "unknown :(".
+
+This way, the Server only gives specific responses for "dragon", "wolf", or "dog", while any other message will be considered unrecognized.
 
 ---
 
@@ -59,8 +63,6 @@ Sisop-FP-2025-IT-B06/
 └── README.md      
 
 ## Pengerjaan
-
-### Soal 1: Animal Sound RPC via TCP Socket
 
 #### Teori
 Communication between processes running on different servers can be done using sockets and TCP/IP protocols. In the operating system context, this mechanism is known as Inter-Process Communication (IPC) through a network.
