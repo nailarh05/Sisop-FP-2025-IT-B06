@@ -225,6 +225,73 @@ address.sin_family = AF_INET;
     address.sin_port = htons(PORT);
 ```
 
+### Teori
+"The bind function assigns a local protocol address to a socket. For TCP, calling bind lets us specify a local IP address and port number for the socket. A server binds a well-known port to its socket, so clients can connect to it." (Stevens et al., 1998, Ch. 4).
+
+### Solusi
+```c
+if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
+        perror("bind failed");
+        exit(EXIT_FAILURE);
+    }
+```
+
+### Teori
+"The listen function converts an unconnected socket into a passive socket, indicating that the kernel should accept incoming connection requests directed to this socket. The second argument, backlog, specifies the maximum number of connections the kernel should queue for this socket."(Stevens et al., 1998, Ch. 4)
+
+### Solusi
+```c
+if (listen(server_fd, 3) < 0) {
+        perror("listen");
+        exit(EXIT_FAILURE);
+    }
+    
+    printf("Server menunggu koneksi di port %d...\n", PORT);
+```
+
+### Teori
+"The accept function extracts the first completed connection from the queue of pending connections for the listening socket (server_fd). It creates a new connected socket and returns a new file descriptor referring to this socket. The original listening socket remains open to accept further connections."(Stevens et al., 1998, Ch. 4)
+
+### Solusi
+```c
+if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
+    perror("accept error");
+    exit(EXIT_FAILURE);
+} else {
+    printf("ACC bosku! Koneksi aman nih ye... (Socket fd: %d)\n", new_socket);   
+}
+```
+
+### Teori
+"A typical server uses an infinite loop to handle client connections persistently until explicitly terminated."(Beej's Guide, Ch. 7)
+
+### Solusi
+```c
+while(1) {
+        int valread = read(new_socket, buffer, BUFFER_SIZE);
+        if (valread <= 0) break;
+        
+        printf("Pesan diterima dari client: %s\n", buffer);
+        
+        char *response;
+        
+        if (strcmp(buffer, "dragon") == 0) {
+            response = "rawr";
+        } else if (strcmp(buffer, "wolf") == 0) {
+            response = "awoo";
+        } else if (strcmp(buffer, "dog") == 0) {
+            response = "woof";
+        } else {
+            response = "unknown :(";
+        }
+        
+        send(new_socket, response, strlen(response), 0);
+        printf("Mengirim respons: %s\n", response);
+        
+        memset(buffer, 0, BUFFER_SIZE);
+    }
+```
+
 ## Video Menjalankan Program
 
 
