@@ -292,6 +292,14 @@ while(1) {
     }
 ```
 
+```c
+close(new_socket);
+    close(server_fd);
+    
+    return 0;
+}
+```
+
 ## Video Menjalankan Program
 
 
