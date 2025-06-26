@@ -177,7 +177,7 @@ This process allows repeated input/output until the client or server is terminat
 ### SERVER SIDE
 
 #### Teori
-"A file descriptor is a small integer that the kernel uses to identify the open files being accessed by a process. Whenever a process opens an existing file or creates a new file, the kernel returns a file descriptor that is used to read or write the file."(Stevens et al., 1998, Ch. 3)
+"The operating system integrates network connections, represented as sockets, at the system call level. These sockets are accessed using a descriptor (a small integer), similar to how an open file is accessed via a descriptor. This allows standard file system calls like read and write, as well as network-specific system calls such as sendmsg and recvmsg, to work with a descriptor associated with a socket."(Stevens et al., 1995, Vol. 2)
 
 ### Solusi
 ```c
@@ -190,7 +190,7 @@ int main() {
 ```
 
 ### Teori
-"The protocol argument to the socket function is typically set to 0 for most applications, which selects the default protocol for the given domain and socket type."(Stevens et al., 1998, Ch. 4).
+"The protocol argument to the socket function is typically set to 0 for most applications, which selects the default protocol for the given domain and socket type."(Stevens et al., 2003, Ch. 4).
 
 ### Solusi
 ```c
@@ -206,7 +206,7 @@ the Berkeley sockets API, the SO_REUSEADDR socket option enables the bypass
 operation. It lets the caller assign itself a local port number even if that port number is part of some connection in the 2MSL wait state. We will see, however, that
 even with this bypass mechanism for one socket (address, port number pair), the
 rules of TCP still (should) prevent this port number from being reused by another
-instantiation of the same connection that is in the 2MSL wait state.(Stevens, 1998, pp. 620)
+instantiation of the same connection that is in the 2MSL wait state.(Stevens, 1994, pp. 620)
 
 ### Solusi 
 ```c
@@ -230,7 +230,7 @@ address.sin_family = AF_INET;
 ```
 
 ### Teori
-"The bind function assigns a local protocol address to a socket. For TCP, calling bind lets us specify a local IP address and port number for the socket. A server binds a well-known port to its socket, so clients can connect to it." (Stevens et al., 1998, Ch. 4).
+"The bind function assigns a local protocol address to a socket. For TCP, calling bind lets us specify a local IP address and port number for the socket. A server binds a well-known port to its socket, so clients can connect to it." (Stevens et al., 2003, Ch. 4).
 
 ### Solusi
 ```c
@@ -241,7 +241,7 @@ if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
 ```
 
 ### Teori
-"The listen function converts an unconnected socket into a passive socket, indicating that the kernel should accept incoming connection requests directed to this socket. The second argument, backlog, specifies the maximum number of connections the kernel should queue for this socket."(Stevens et al., 1998, Ch. 4)
+"The listen function converts an unconnected socket into a passive socket, indicating that the kernel should accept incoming connection requests directed to this socket. The second argument, backlog, specifies the maximum number of connections the kernel should queue for this socket."(Stevens et al., 2003, Ch. 4)
 
 ### Solusi
 ```c
@@ -254,7 +254,10 @@ if (listen(server_fd, 3) < 0) {
 ```
 
 ### Teori
-"The accept function extracts the first completed connection from the queue of pending connections for the listening socket (server_fd). It creates a new connected socket and returns a new file descriptor referring to this socket. The original listening socket remains open to accept further connections."(Stevens et al., 1998, Ch. 4)
+"The accept function is called by a TCP server to return the next completed connection from the front of the
+completed connection queue (Figure 4.7). If the completed connection queue is empty, the
+process is put to sleep (assuming the default of a blocking socket).
+"(Stevens et al., 2003, Ch. 4)
 
 ### Solusi
 ```c
@@ -316,6 +319,8 @@ https://youtu.be/TfTT56XyYHU
 3. Beej's Guide to Network Programming. - https://beej.us/guide/bgnet/html/ : A lightweight and popular guide for socket programming in C.
 4. Linux man pages: `man socket`, `man bind`, `man connect`, `man send`, `man recv` : Official documentation for Linux system calls related to networking.
 5. Stevens, W. R. (1994). TCP/IP Illustrated, Volume 1: The Protocols. Addison-Wesley.
+6. Wright, G. R., & Stevens, W. R. (1995). *TCP/IP illustrated, volume 2: The implementation*. Addison-Wesley Professional.
+7. Stevens, W. R. (2003). UNIX network programming, volume 1: The sockets networking API (3rd ed.). Addison-Wesley Professional.
 
 ---
 
